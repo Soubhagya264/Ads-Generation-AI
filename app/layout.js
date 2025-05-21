@@ -1,15 +1,14 @@
-import { Geist, Geist_Mono } from "next/font/google";
+
+import { ClerkProvider } from "@clerk/nextjs";
+import { dark as darkTheme } from "@clerk/themes";
+import { useTheme } from "next-themes";
+import { Outfit } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
+import AuthProvider from "@/providers/auth-provider";
+import Provider from "./provider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const outfit = Outfit({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -17,12 +16,15 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        <AuthProvider>
+          <NextThemesProvider attribute="class" defaultTheme="dark">
+            <Provider>{children}</Provider>
+          </NextThemesProvider>
+        </AuthProvider>
       </body>
     </html>
   );
