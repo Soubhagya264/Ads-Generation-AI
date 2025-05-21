@@ -1,5 +1,4 @@
 
-import axios from 'axios';
 import { voices } from '@/lib/voiceData';
 
 export async function GET(req) {

@@ -1,7 +1,5 @@
 
 import OpenAI from "openai"
-import { CreateVideoData } from "@/convex/videoData";
-
 import { NextResponse } from "next/server"
 import { GENERATE_SCRIPT_PROMPT } from "@/services/prompt";
 
