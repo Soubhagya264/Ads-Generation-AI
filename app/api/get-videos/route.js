@@ -7,7 +7,7 @@ import { v } from "convex/react";
 import { NextResponse } from "next/server";
 import { use } from "react";
 import { useConvex } from "convex/react";
-import { useRouter } from "next/navigation";
+
 
 export async function GET(req) {
     const convex = useConvex();
