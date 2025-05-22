@@ -13,6 +13,7 @@ const LazyVideoCard = ({ src, index }) => {
     const videoRef = useRef(null);
     const containerRef = useRef(null);
     const [isVisible, setIsVisible] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -37,6 +38,10 @@ const LazyVideoCard = ({ src, index }) => {
         };
     }, []);
 
+    const handleCanPlay = () => {
+        setIsLoading(false);
+    };
+
     return (
         <motion.div
             ref={containerRef}
@@ -48,22 +53,33 @@ const LazyVideoCard = ({ src, index }) => {
         >
             <div className="relative bg-white/10 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-md border border-white/20 group hover:scale-105 transition-transform duration-300">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent z-10"></div>
+
                 {isVisible && (
-                    <video
-                        ref={videoRef}
-                        className="w-full h-64 object-cover rounded-t-3xl"
-                        muted
-                        loop
-                        playsInline
-                        preload="none"
-                    >
-                        <source src={src} type="video/mp4" />
-                    </video>
+                    <>
+                        <video
+                            ref={videoRef}
+                            className="w-full h-64 object-cover rounded-t-3xl"
+                            muted
+                            loop
+                            playsInline
+                            preload="auto"
+                            onCanPlay={handleCanPlay}
+                        >
+                            <source src={src} type="video/mp4" />
+                        </video>
+
+                        {isLoading && (
+                            <div className="absolute inset-0 flex items-center justify-center z-20 bg-black/40">
+                                <div className="w-10 h-10 border-4 border-white border-t-transparent rounded-full animate-spin" />
+                            </div>
+                        )}
+                    </>
                 )}
             </div>
         </motion.div>
     );
 };
+
 
 export default function HeroWithVideos() {
     return (
