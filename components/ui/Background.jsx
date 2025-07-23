@@ -9,7 +9,7 @@ import { TextGenerateEffect } from "./text-generated-effect";
 import { Testimonials } from "./Testimonials";
 import { HoverBorderGradient } from "./hover-border-gradient";
 import Footer from "./footer";
-import DemoVideos from "./ShowDemoVideo";
+import HeroWithImages from "./ShowDemo";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { useSignIn } from "@clerk/nextjs";
@@ -77,7 +77,7 @@ export function HeroSectionOne() {
                 </TextAnimate>
                 <WobbleCards />
             </div>
-            <DemoVideos />
+            <HeroWithImages/>
             <div>
                 <TextAnimate animation="slideUp" by="text">
                     <span className="dark:text-neutral-300 text-3xl font-bold mb-56 ">Testimonials</span>
